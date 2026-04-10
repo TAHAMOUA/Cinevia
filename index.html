@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinévia -  Découvrez les meilleurs films</title>
+    <link rel="stylesheet" href="style.css">
+
+
+    
+</head>
+<body>
+
+<header class="navbar">
+    <h1 class="logo" >Cinevia</h1>
+
+    <input class="search" type="text" placeholder="search">
+
+    <ul class="nav-menu">
+        <li><a href="index.html" >Accueil</a></li>
+        <li><a href="#Explorer">Film</a></li>
+        <li><a href="#fav">Favori</a></li>
+    </ul>
+</header>
+
+<section class="hero-section">
+    <div class="container hero-content">
+            <p class="hero-tagline">
+                Découvrez les meilleurs films <span class="emoji"></span>
+            </p>
+            <p class="hero-sub-tagline">
+                Explorez, recherchez et ajoutez vos films préférés
+            </p>
+            <a href="#Explorer" class="hero-btn" >Explorer maintenant</a>
+        </div>
+    </section>
+
+    <main class="container">
+
+        <section class="search-filter-area">
+            
+            <nav class="filter-buttons">
+                <button class="filter-btn Tous">Tous</button>
+                <button class="filter-btn Action-films">Action</button>
+                <button class="filter-btn Comedie-films">Comédie</button>
+                <button class="filter-btn Drama-films">Drame</button>
+                <button class="filter-btn Sci-Fi-films">Sci-Fi</button>
+                <button class="filter-btn Thriller-films">Thriller</button>
+            </nav>
+        </section>
+
+     <section class="film-catalog" id="Explorer">
+        <h2 class="section-title">Films disponibles</h2>
+
+        <div class="film-grid"  >
+
+        </div>
+
+    </section>
+
+    <section class="film-catalog" id="fav">
+        <h2 class="section-title">Mes favoris <span class="heart"></span></h2>
+
+        <div class="film-grid">
+
+        </div>
+    </section>
+
+</main>
+
+    <footer class="container-main-footer">
+        <div class="logo-footer">Cinévia</div>
+        <div class="copyright">© 2024 Cinévia — Tous droits réservés</div>
+    </footer>
+    
+
+<script src="script.js"></script>
+
+</body>
+</html>
