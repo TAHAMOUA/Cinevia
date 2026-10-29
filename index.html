@@ -1,80 +1,165 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cinévia -  Découvrez les meilleurs films</title>
-    <link rel="stylesheet" href="style.css">
-
-
-    
-</head>
-<body>
-
-<header class="navbar">
-    <h1 class="logo" >Cinevia</h1>
-
-    <input class="search" type="text" placeholder="search">
-
-    <ul class="nav-menu">
-        <li><a href="index.html" >Accueil</a></li>
-        <li><a href="#Explorer">Film</a></li>
-        <li><a href="#fav">Favori</a></li>
-    </ul>
-</header>
-
-<section class="hero-section">
-    <div class="container hero-content">
-            <p class="hero-tagline">
-                Découvrez les meilleurs films <span class="emoji"></span>
-            </p>
-            <p class="hero-sub-tagline">
-                Explorez, recherchez et ajoutez vos films préférés
-            </p>
-            <a href="#Explorer" class="hero-btn" >Explorer maintenant</a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#101110" />
+    <meta
+      name="description"
+      content="Cinévia : explorez 17 films et retrouvez vos favoris. Projet personnel de Taha Mouaddine."
+    />
+    <title>Cinévia — Le cinéma, à votre rythme.</title>
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preload" as="image" href="assets/hero.jpg" />
+    <script defer src="films.js"></script>
+    <script defer src="script.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#Explorer">Aller aux films</a>
+    <header class="navbar wrap">
+      <a class="logo" href="#" aria-label="Cinévia, accueil"
+        ><span class="logo-icon">c.</span>cinévia<sup>®</sup></a
+      >
+      <nav aria-label="Navigation principale">
+        <a href="#Explorer">Explorer</a
+        ><a href="#fav">Ma collection <span id="fav-count">0</span></a>
+      </nav>
+      <span class="nav-note">Pour l'amour du cinéma.</span>
+    </header>
+    <main>
+      <section class="hero wrap" aria-labelledby="hero-title">
+        <img
+          class="hero-image"
+          src="assets/hero.jpg"
+          alt="K et son véhicule dans la brume de Blade Runner 2049"
+          width="1920"
+          height="1080"
+          fetchpriority="high"
+        />
+        <div class="hero-shade"></div>
+        <div class="hero-content">
+          <p class="eyebrow">● &nbsp; DES FILMS. DES ÉMOTIONS.</p>
+          <h1 id="hero-title">
+            La prochaine<br />histoire qui<br />vous <em>marquera.</em>
+          </h1>
+          <p class="hero-copy">
+            Les grands frissons commencent ici.<br />Explorez notre sélection et
+            gardez vos coups de cœur.
+          </p>
+          <a class="btn light" href="#Explorer"
+            >Trouver mon prochain film <span>↗</span></a
+          >
         </div>
-    </section>
-
-    <main class="container">
-
-        <section class="search-filter-area">
-            
-            <nav class="filter-buttons">
-                <button class="filter-btn Tous">Tous</button>
-                <button class="filter-btn Action-films">Action</button>
-                <button class="filter-btn Comedie-films">Comédie</button>
-                <button class="filter-btn Drama-films">Drame</button>
-                <button class="filter-btn Sci-Fi-films">Sci-Fi</button>
-                <button class="filter-btn Thriller-films">Thriller</button>
-            </nav>
-        </section>
-
-     <section class="film-catalog" id="Explorer">
-        <h2 class="section-title">Films disponibles</h2>
-
-        <div class="film-grid"  >
-
+        <button class="hero-feature" data-details="6">
+          <span class="feature-arrow">↗</span
+          ><span
+            ><small>À REDÉCOUVRIR</small><strong>Blade Runner 2049</strong
+            ><span>Sci-Fi · Thriller / Découvrir le film</span></span
+          ></button
+        ><span class="hero-index"
+          >LA SÉLECTION CINÉVIA &nbsp; &nbsp; 01 / 17</span
+        >
+      </section>
+      <div class="intro-strip wrap">
+        <span>Moins de défilement. <b>Plus de cinéma.</b></span
+        ><span
+          >17 films sélectionnés &nbsp; · &nbsp; Une collection à vous</span
+        >
+      </div>
+      <section
+        class="catalog wrap"
+        id="Explorer"
+        aria-labelledby="catalog-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow muted">VOTRE PROCHAINE SÉANCE</p>
+            <h2 id="catalog-title">Explorez les <em>histoires.</em></h2>
+          </div>
+          <p>
+            Du grand spectacle aux émotions brutes.<br />Choisissez selon votre
+            humeur.
+          </p>
         </div>
-
-    </section>
-
-    <section class="film-catalog" id="fav">
-        <h2 class="section-title">Mes favoris <span class="heart"></span></h2>
-
-        <div class="film-grid">
-
+        <div class="catalog-tools">
+          <div class="filters" role="group" aria-label="Filtrer par genre">
+            <button aria-pressed="true" data-genre="Tous">Tous les films</button
+            ><button aria-pressed="false" data-genre="Action">Action</button
+            ><button aria-pressed="false" data-genre="Comédie">Comédie</button
+            ><button aria-pressed="false" data-genre="Drame">Drame</button
+            ><button aria-pressed="false" data-genre="Sci-Fi">Sci-Fi</button
+            ><button aria-pressed="false" data-genre="Thriller">
+              Thriller
+            </button>
+          </div>
+          <label class="search-label"
+            ><span aria-hidden="true">⌕</span
+            ><span class="sr-only">Rechercher un film</span
+            ><input
+              class="search"
+              type="search"
+              placeholder="Rechercher un film…"
+              maxlength="100"
+          /></label>
         </div>
-    </section>
-
-</main>
-
-    <footer class="container-main-footer">
-        <div class="logo-footer">Cinévia</div>
-        <div class="copyright">© 2024 Cinévia — Tous droits réservés</div>
+        <div class="results-line">
+          <span id="results-count" role="status"></span
+          ><button class="text-btn" id="reset" hidden>
+            Effacer les filtres ↗
+          </button>
+        </div>
+        <div class="film-grid" id="film-grid"></div>
+      </section>
+      <section
+        class="collection wrap"
+        id="fav"
+        aria-labelledby="collection-title"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow muted">LES HISTOIRES QUI RESTENT</p>
+            <h2 id="collection-title">Votre <em>collection.</em></h2>
+          </div>
+          <p>Vos favoris, sauvegardés sur cet appareil.</p>
+        </div>
+        <div class="film-grid" id="favorite-grid"></div>
+      </section>
+    </main>
+    <footer class="wrap">
+      <a class="logo" href="#">cinévia<sup>®</sup></a>
+      <p>Une invitation à aimer le cinéma.</p>
+      <span
+        >Projet personnel ·
+        <a
+          href="https://github.com/TAHAMOUA/Cinevia"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Taha Mouaddine ↗</a
+        ></span
+      >
     </footer>
-    
-
-<script src="script.js"></script>
-
-</body>
+    <dialog id="film-dialog" aria-labelledby="modal-title">
+      <div class="modal-layout">
+        <img id="modal-poster" alt="" width="400" height="600" />
+        <div class="modal-info">
+          <p class="eyebrow muted">DANS LA SÉLECTION CINÉVIA</p>
+          <h2 id="modal-title"></h2>
+          <p id="modal-genre"></p>
+          <p id="modal-description"></p>
+          <button id="modal-favorite" class="btn accent"></button>
+          <p class="modal-note">
+            Une fiche pour découvrir le film. Aucun streaming proposé.
+          </p>
+        </div>
+        <button class="modal-close" aria-label="Fermer les détails">✕</button>
+      </div>
+    </dialog>
+    <div class="toast" role="status" id="toast"></div>
+    <noscript
+      ><p class="wrap">
+        Activez JavaScript pour explorer les films et enregistrer vos favoris.
+      </p></noscript
+    >
+  </body>
 </html>

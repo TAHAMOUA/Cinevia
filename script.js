@@ -1,278 +1,183 @@
-const films = [
-    {
-        title: "Gladiator",
-        genre: "Action • Drame • Historique",
-        description: "Un général romain trahi devient gladiateur et cherche à se venger de l'empereur corrompu.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/ty8TGRuvJLPUmAR1H1nRIsgwvim.jpg"
-    },
-    {
-        title: "The Matrix",
-        genre: "Sci-Fi • Action",
-        description: "Un hacker découvre que la réalité est une simulation contrôlée par des machines.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/f89U3ADr1oiB1s9GkdPOEpXUk5H.jpg"
-    },
-    {
-        title: "Whiplash",
-        genre: "Drame • Musique",
-        description: "Un jeune batteur est poussé à ses limites par un professeur impitoyable.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/7fn624j5lj3xTme2SgiLCeuedmO.jpg"
-    },
-    {
-        title: "The Wolf of Wall Street",
-        genre: "Biographie • Comédie • Crime",
-        description: "L'ascension et la chute d'un courtier vivant dans l'excès.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/sOxr33wnRuKazR9ClHek73T8qnK.jpg"
-    },
-    {
-        title: "Django Unchained",
-        genre: "Western • Drame",
-        description: "Un esclave libéré part sauver sa femme avec un chasseur de primes.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/7oWY8VDWW7thTzWh3OKYRkWUlD5.jpg"
-    },
-    {
-        title: "The Social Network",
-        genre: "Drame • Biographie",
-        description: "L'histoire de la création de Facebook et ses conflits.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/n0ybibhJtQ5icDqTp8eRytcIHJx.jpg"
-    },
-    {
-        title: "Blade Runner 2049",
-        genre: "Sci-Fi • Thriller",
-        description: "Un officier découvre un secret qui menace la société.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
-    },
-    {
-    title: "The Revenant",
-    genre: "Aventure • Drame",
-    description: "Un trappeur lutte pour survivre dans la nature sauvage.",
-    posterUrl: "https://image.tmdb.org/t/p/w500/ji3ecJphATlVgWNY0B0RVXZizdf.jpg"
-    },
-    {
-        title: "Shutter Island",
-        genre: "Thriller • Mystère",
-        description: "Un marshal enquête sur une disparition dans un hôpital isolé.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/kve20tXwUZpu4GUX8l6X7Z4jmL6.jpg"
-    },
-    {
-        title: "La La Land",
-        genre: "Comédie • Romance • Musique",
-        description: "Une histoire d'amour entre une actrice et un musicien à Los Angeles.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/uDO8zWDhfWwoFdKS4fzkUJt0Rf0.jpg"
-    },
-    {
-        title: "Deadpool",
-        genre: "Action • Comédie",
-        description: "Un mercenaire au humour noir devient un anti-héros.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/fSRb7vyIP8rQpL0I47P3qUsEKX3.jpg"
-    },
-    {
-        title: "Get Out",
-        genre: "Horreur • Thriller",
-        description: "Un jeune homme découvre un secret terrifiant chez la famille de sa copine.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/tFXcEccSQMf3lfhfXKSU9iRBpa3.jpg"
-    },
-    {
-        title: "The Conjuring",
-        genre: "Horreur • Mystère",
-        description: "Des enquêteurs paranormaux aident une famille terrorisée.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/wVYREutTvI2tmxr6ujrHT704wGF.jpg"
-    },
-    {
-        title: "Edge of Tomorrow",
-        genre: "Sci-Fi • Action",
-        description: "Un soldat revit la même journée en combattant des extraterrestres.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/uUHvlkLavotfGsNtosDy8ShsIYF.jpg"
-    },
-    {
-        title: "The Intouchables",
-        genre: "Comédie • Drame",
-        description: "Une amitié improbable entre un aristocrate paralysé et son aide-soignant.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/323BP0itpxTsO0skTwdnVmf7YC9.jpg"
-    },
-    {
-        title: "Prisoners",
-        genre: "Thriller • Crime",
-        description: "Un père désespéré cherche sa fille disparue.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/uhviyknTT5cEQXbn6vWIqfM4vGm.jpg"
-    },
-    {
-        title: "The Prestige",
-        genre: "Drame • Mystère",
-        description: "Deux magiciens rivaux s'affrontent dans une compétition obsessionnelle.",
-        posterUrl: "https://image.tmdb.org/t/p/w500/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg"
-    }
-];
-// ============================================================
-// STATE
-// ============================================================
-let favorites = [];
-
-const availableFilmsContainer = document.querySelectorAll(".film-grid")[0];
-const favoriteFilmsContainer  = document.querySelectorAll(".film-grid")[1];
-const searchInput             = document.querySelector(".search");
-const filterButtons           = document.querySelectorAll(".filter-btn");
-
-// ============================================================
-// MODAL
-// ============================================================
-const modal = document.createElement("div");
-modal.className = "film-modal-overlay";
-modal.innerHTML = `
-    <div class="film-modal">
-        <button class="modal-close-btn" aria-label="Fermer">✕</button>
-        <img class="modal-poster" src="" alt="">
-        <div class="modal-info">
-            <h2 class="modal-title"></h2>
-            <p class="modal-genre"></p>
-            <p class="modal-description"></p>
-            <button class="modal-fav-btn"> Ajouter aux favoris</button>
-        </div>
-    </div>
-`;
-document.body.appendChild(modal);
-
-modal.querySelector(".modal-close-btn").addEventListener("click", closeModal);
-modal.addEventListener("click", function (e) {
-    if (e.target === modal) closeModal();
-});
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape") closeModal();
-});
-
-function openModal(film) {
-    modal.querySelector(".modal-poster").src = film.posterUrl;
-    modal.querySelector(".modal-poster").alt = film.title;
-    modal.querySelector(".modal-title").textContent = film.title;
-    modal.querySelector(".modal-genre").textContent = film.genre;
-    modal.querySelector(".modal-description").textContent = film.description;
-
-    const favBtn = modal.querySelector(".modal-fav-btn");
-    const alreadyFav = favorites.some(f => f.title === film.title);
-
-    if (alreadyFav) {
-        favBtn.textContent = "✓ Déjà dans les favoris";
-        favBtn.disabled = true;
-    } else {
-        favBtn.textContent = "❤ Ajouter aux favoris";
-        favBtn.disabled = false;
-        favBtn.onclick = function () {
-            favorites.push(film);
-            renderFavorites();
-            favBtn.textContent = "✓ Déjà dans les favoris";
-            favBtn.disabled = true;
-        };
-    }
-
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
+/* Original catalogue and discovery workflows retained; no framework or API key. */
+const $ = (s) => document.querySelector(s),
+  storageKey = "cineviaFavorites";
+let favorites = [],
+  genre = "Tous",
+  query = "",
+  selectedFilm = null,
+  toastTimer;
+try {
+  const v = JSON.parse(localStorage.getItem(storageKey) || "[]");
+  if (Array.isArray(v))
+    favorites = v.filter(
+      (id) => Number.isInteger(id) && films.some((f) => f.id === id),
+    );
+} catch {
+  /* Private browsing/corrupt data must not break discovery. */
 }
-
-function closeModal() {
-    modal.classList.remove("active");
-    document.body.style.overflow = "";
+const dialog = $("#film-dialog");
+function notify(message) {
+  clearTimeout(toastTimer);
+  $("#toast").textContent = message;
+  $("#toast").classList.add("show");
+  toastTimer = setTimeout(() => $("#toast").classList.remove("show"), 2800);
 }
-
-// ============================================================
-// CARD TEMPLATE
-// ============================================================
-function createCard(film, isFavorite = false) {
-    return `
-        <article class="film-card" style="--poster-url: url('${film.posterUrl}');" data-title="${film.title}">
-            <div class="card-initial">
-                <h3 class="film-card-title">${film.title}</h3>
-                <p class="film-card-genre">${film.genre.split(' • ').slice(0, 2).join(' • ')}</p>
-                <div class="card-buttons">
-                    <button class="details-btn">voir les détails</button>
-                    ${isFavorite ? `<button class="remove-fav-btn" data-title="${film.title}">🗑 Supprimer</button>` : ''}
-                </div>
-            </div>
-        </article>
-    `;
+function normalize(s) {
+  return s
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
 }
-
-// ============================================================
-// RENDER
-// ============================================================
-function renderFilms(filmsArray) {
-    availableFilmsContainer.innerHTML = "";
-    filmsArray.forEach(film => {
-        availableFilmsContainer.innerHTML += createCard(film, false);
-    });
-    attachDetailButtons(availableFilmsContainer);
+function card(f, i) {
+  const saved = favorites.includes(f.id);
+  return `<article class="film-card" style="--delay:${Math.min(i, 4) * 45}ms"><div class="poster-wrap"><button class="poster-button" data-details="${f.id}" aria-label="Voir les détails de ${f.title}"><img src="${f.posterUrl}" alt="Affiche de ${f.title}" loading="lazy" width="300" height="450"><span class="poster-cta">Découvrir le film <span aria-hidden="true">↗</span></span></button><button class="favorite-btn" data-favorite="${f.id}" aria-label="Favori : ${f.title}" aria-pressed="${saved}">${saved ? "♥" : "♡"}</button></div><div class="card-info"><h3>${f.title}</h3><p>${f.genre}</p></div></article>`;
 }
-
+function renderFilms() {
+  const result = films.filter(
+    (f) =>
+      (genre === "Tous" || f.genre.includes(genre)) &&
+      normalize(f.title).includes(normalize(query)),
+  );
+  $("#film-grid").innerHTML =
+    result.map(card).join("") ||
+    '<div class="empty"><div class="empty-symbol">⌕</div><h3>Aucun film pour cette recherche.</h3><p>Essayez un autre titre ou effacez les filtres.</p><button class="text-btn" data-reset>Voir tous les films ↗</button></div>';
+  $("#results-count").textContent =
+    `${result.length} film${result.length !== 1 ? "s" : ""} à découvrir`;
+  $("#reset").hidden = genre === "Tous" && !query;
+  document
+    .querySelectorAll("[data-genre]")
+    .forEach((b) => b.setAttribute("aria-pressed", b.dataset.genre === genre));
+}
 function renderFavorites() {
-    favoriteFilmsContainer.innerHTML = "";
-
-    if (favorites.length === 0) {
-        favoriteFilmsContainer.innerHTML = `<p class="empty-fav">Aucun film favori pour le moment</p>`;
-        return;
+  $("#fav-count").textContent = favorites.length;
+  $("#favorite-grid").innerHTML =
+    favorites
+      .map((id) => films.find((f) => f.id === id))
+      .map(card)
+      .join("") ||
+    '<div class="empty"><div class="empty-symbol">♡</div><h3>Le début d’une belle collection.</h3><p>Un film vous parle ? Touchez le cœur pour le retrouver ici.</p><a href="#Explorer">Explorer la sélection ↗</a></div>';
+}
+function updateControls() {
+  document.querySelectorAll("[data-favorite]").forEach((b) => {
+    const saved = favorites.includes(Number(b.dataset.favorite));
+    b.setAttribute("aria-pressed", saved);
+    b.textContent = saved ? "♥" : "♡";
+  });
+  if (selectedFilm) {
+    const saved = favorites.includes(selectedFilm.id);
+    $("#modal-favorite").textContent = saved
+      ? "♥ Retirer de ma collection"
+      : "♡ Ajouter à ma collection";
+    $("#modal-favorite").setAttribute("aria-pressed", saved);
+  }
+}
+function toggleFavorite(id) {
+  const existed = favorites.includes(id);
+  favorites = existed ? favorites.filter((f) => f !== id) : [...favorites, id];
+  let saved = true;
+  try {
+    localStorage.setItem(storageKey, JSON.stringify(favorites));
+  } catch {
+    saved = false;
+    notify("Stockage indisponible : favoris conservés pour cette visite.");
+  }
+  const inCollection = $("#favorite-grid").contains(document.activeElement);
+  renderFavorites();
+  updateControls();
+  if (inCollection)
+    ($("#favorite-grid button") || $("#favorite-grid a"))?.focus({
+      preventScroll: true,
+    });
+  if (saved)
+    notify(
+      existed
+        ? "Film retiré de votre collection."
+        : "Film ajouté à votre collection.",
+    );
+}
+function openDetails(id) {
+  selectedFilm = films.find((f) => f.id === id);
+  if (!selectedFilm) return;
+  $("#modal-title").textContent = selectedFilm.title;
+  $("#modal-poster").src = selectedFilm.posterUrl;
+  $("#modal-poster").alt = `Affiche de ${selectedFilm.title}`;
+  $("#modal-genre").textContent = selectedFilm.genre;
+  $("#modal-description").textContent = selectedFilm.description;
+  updateControls();
+  dialog.showModal();
+  document.body.style.overflow = "hidden";
+  $(".modal-close").focus();
+}
+dialog.addEventListener("close", () => {
+  document.body.style.overflow = "";
+});
+$(".modal-close").addEventListener("click", () => dialog.close());
+dialog.addEventListener("click", (e) => {
+  if (e.target === dialog) {
+    const r = dialog.getBoundingClientRect();
+    if (
+      e.clientX < r.left ||
+      e.clientX > r.right ||
+      e.clientY < r.top ||
+      e.clientY > r.bottom
+    )
+      dialog.close();
+  }
+});
+$("#modal-favorite").addEventListener("click", () =>
+  toggleFavorite(selectedFilm.id),
+);
+function resetFilters() {
+  genre = "Tous";
+  query = "";
+  $(".search").value = "";
+  renderFilms();
+}
+document.addEventListener("click", (e) => {
+  const d = e.target.closest("[data-details]"),
+    f = e.target.closest("[data-favorite]"),
+    g = e.target.closest("[data-genre]");
+  if (d) openDetails(Number(d.dataset.details));
+  if (f) toggleFavorite(Number(f.dataset.favorite));
+  if (g) {
+    genre = g.dataset.genre;
+    renderFilms();
+  }
+  if (e.target.closest("[data-reset]")) resetFilters();
+});
+$("#reset").addEventListener("click", resetFilters);
+$(".search").addEventListener("input", (e) => {
+  query = e.target.value.trim();
+  renderFilms();
+});
+document.addEventListener(
+  "error",
+  (e) => {
+    if (
+      e.target.tagName === "IMG" &&
+      !e.target.src.endsWith("poster-fallback.svg")
+    ) {
+      e.target.src = "assets/poster-fallback.svg";
+      e.target.alt += " — visuel indisponible";
     }
-
-    favorites.forEach(film => {
-        favoriteFilmsContainer.innerHTML += createCard(film, true);
-    });
-
-    favoriteFilmsContainer.querySelectorAll(".remove-fav-btn").forEach(btn => {
-        btn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            removeFromFavorites(this.dataset.title);
-        });
-    });
-
-    attachDetailButtons(favoriteFilmsContainer);
-}
-
-function removeFromFavorites(title) {
-    favorites = favorites.filter(f => f.title !== title);
-    renderFavorites();
-}
-
-// ============================================================
-// DETAIL BUTTONS
-// ============================================================
-function attachDetailButtons(container) {
-    container.querySelectorAll(".details-btn").forEach(btn => {
-        btn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            const title = this.closest(".film-card").dataset.title;
-            const film = films.find(f => f.title === title) || favorites.find(f => f.title === title);
-            if (film) openModal(film);
-        });
-    });
-}
-
-// ============================================================
-// SEARCH
-// ============================================================
-searchInput.addEventListener("input", function () {
-    const val = this.value.toLowerCase();
-    const filtered = films.filter(f => f.title.toLowerCase().startsWith(val));
-    renderFilms(filtered);
-});
-
-// ============================================================
-// FILTER BUTTONS
-// ============================================================
-filterButtons.forEach(button => {
-    button.addEventListener("click", function () {
-        filterButtons.forEach(btn => btn.classList.remove("active"));
-        this.classList.add("active");
-
-        const filter = this.textContent.trim().toLowerCase();
-
-        if (filter === "tous") {
-            renderFilms(films);
-            return;
-        }
-
-        const filtered = films.filter(f => f.genre.toLowerCase().includes(filter));
-        renderFilms(filtered);
-    });
-});
-
-// ============================================================
-// INIT
-// ============================================================
-renderFilms(films);
+  },
+  { capture: true },
+);
+renderFilms();
 renderFavorites();
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add("revealed");
+          observer.unobserve(e.target);
+        }
+      }),
+    { threshold: 0.08 },
+  );
+  document.querySelectorAll(".section-heading,.intro-strip").forEach((el) => {
+    el.classList.add("reveal-ready");
+    observer.observe(el);
+  });
+}
