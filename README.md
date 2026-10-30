@@ -32,6 +32,12 @@ Open http://localhost:4173. Alternatively use any static web server. No dependen
 
 ## Build and deployment
 
+### Vercel handoff
+
+`vercel.json` now declares the existing vanilla frontend (`framework: null`), `node build.mjs` as the build command, and `dist` as the output directory. Import the `portfolio-polish` branch of `TAHAMOUA/Cinevia` into Vercel with the repository root as Root Directory. Configure that branch as the production branch if `main` is kept as the recoverable original. No environment variables or framework migration are needed. `.vercelignore` excludes the Sites metadata and local credentials from Vercel uploads.
+
+**Status:** configuration and local build are ready; pushing this branch to the user's GitHub and deploying under the user's Vercel account await account connection. The live URL below describes the existing Sites deployment, not a completed Vercel deployment.
+
 ```sh
 node --check script.js
 node --check films.js
