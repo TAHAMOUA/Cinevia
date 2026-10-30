@@ -2,7 +2,7 @@
 
 An improved **personal/training project** by Taha Mouaddine. This is a refinement of [TAHAMOUA/Cinevia](https://github.com/TAHAMOUA/Cinevia), not a paid client project or a new application with an unrelated identity.
 
-**Live:** https://cinevia-taha-portfolio.peppycrab2049.chatgpt.site
+**Live:** https://cinevia-portfolio.vercel.app
 
 ## Provenance and recovery
 
@@ -18,7 +18,7 @@ Original source inspected at commit `24d8803f2826774bb5d5e9d227e98f3ab0dff53a`. 
 
 ## Technology and dependencies
 
-HTML5, CSS3, **vanilla JavaScript**, native `<dialog>`, IntersectionObserver and localStorage. The original technology stack is retained. No React, Next.js, runtime npm packages, API key, account or backend. Node.js 20+ is only needed for the optional static build.
+HTML5, CSS3, **vanilla JavaScript**, native `<dialog>`, IntersectionObserver and localStorage. The original technology stack is retained. No React, Next.js, runtime npm packages, API key, account or backend. Node.js 22+ is only needed for the optional static build.
 
 ## Run locally
 
@@ -32,11 +32,11 @@ Open http://localhost:4173. Alternatively use any static web server. No dependen
 
 ## Build and deployment
 
-### Vercel handoff
+### Vercel deployment
 
 `vercel.json` now declares the existing vanilla frontend (`framework: null`), `node build.mjs` as the build command, and `dist` as the output directory. Import the `portfolio-polish` branch of `TAHAMOUA/Cinevia` into Vercel with the repository root as Root Directory. Configure that branch as the production branch if `main` is kept as the recoverable original. No environment variables or framework migration are needed. `.vercelignore` excludes the Sites metadata and local credentials from Vercel uploads.
 
-**Status:** configuration and local build are ready; pushing this branch to the user's GitHub and deploying under the user's Vercel account await account connection. The live URL below describes the existing Sites deployment, not a completed Vercel deployment.
+**Status:** deployed to the owner's Vercel Hobby account, with the improved source published to `portfolio-polish` in this GitHub repository. The production URL above is accessible without login. Deployment currently uses the Vercel CLI; automatic Git-push deployment is not connected because Vercel rejected the Git repository connection attempt. Future updates require an explicit CLI deployment until that integration is authorized in the Vercel dashboard. No deployment credential is included in this repository.
 
 ```sh
 node --check script.js
@@ -45,7 +45,7 @@ node build.mjs
 python -m http.server 4173 --directory dist
 ```
 
-Publish `dist/` with any HTTPS static host. The portfolio version uses Sites static hosting; `.openai/hosting.json` identifies its Site and the `dist` public directory. Its source is synchronized to the hosting source repository before saving a built archive and deploying. No server runtime is required. To deploy a separate copy as a new Site, remove the existing hosting identity and register a new one; do not reuse another deployment's ID.
+The production deployment uses Vercel with the static configuration in `vercel.json`. From an authenticated Vercel CLI session, link this directory to `cinevia-portfolio` in the owner's account, then run `vercel deploy --prod`. Confirm the linked project before deploying. `.openai/hosting.json` is retained only as metadata for the earlier Sites deployment; Vercel ignores it. `build.mjs` copies only the runtime files into `dist/`. Other static HTTPS hosts can also serve that directory.
 
 `build.mjs` explicitly copies only the runtime files and `assets/`, excluding Git metadata, READMEs, old experiments and hosting source credentials. Never add credentials to source files. Old `image/` assets remain in source history for recovery but are not published.
 
