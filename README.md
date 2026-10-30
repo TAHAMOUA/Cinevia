@@ -6,7 +6,7 @@ An improved **personal/training project** by Taha Mouaddine. This is a refinemen
 
 ## Provenance and recovery
 
-Original source inspected at commit `24d8803f2826774bb5d5e9d227e98f3ab0dff53a`. Work lives in a separate checkout on `portfolio-polish`; the original GitHub repository was not overwritten. The original 17 films, French descriptions, genres, film details, search, genre filters and collection workflow are retained. `README.original.md` preserves the original README. Git history retains the original source; use the original commit in a separate branch to recover it.
+Original source inspected at commit `24d8803f2826774bb5d5e9d227e98f3ab0dff53a`. Work lives in a separate checkout on `portfolio-polish`; the original `main` branch is preserved; the improved edition is published to the same repository on `portfolio-polish`. The original 17 films, French descriptions, genres, film details, search, genre filters and collection workflow are retained. `README.original.md` preserves the original README. Git history retains the original source; use the original commit in a separate branch to recover it.
 
 ## What changed
 
