@@ -14,7 +14,7 @@ Original source inspected at commit `24d8803f2826774bb5d5e9d227e98f3ab0dff53a`. 
 - Coordinated entrance motion, intersection-based heading reveals, poster zoom, visible hover/focus actions, animated dialog and feedback. Reduced-motion preferences disable movement and smooth scrolling.
 - Search now matches anywhere in titles, ignores accents and combines with the active genre. Clear/reset and meaningful empty results are available.
 - Favorites persist in `localStorage`, update across the catalogue, dialog and collection, and handle unavailable/corrupt storage without crashing.
-- Native modal dialog supplies focus trapping and Escape dismissal, restores focus to the opener, supports backdrop dismissal and locks background scroll. Buttons, input labels, skip link, live counts, toast announcements and image fallbacks improve accessibility.
+- Native modal dialog with explicit forward/backward Tab wrapping and Escape dismissal restores focus to the opener, supports backdrop dismissal and locks background scroll. Buttons, input labels, skip link, live counts, toast announcements and image fallbacks improve accessibility.
 
 ## Technology and dependencies
 
